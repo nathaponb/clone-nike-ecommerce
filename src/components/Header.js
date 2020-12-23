@@ -1,7 +1,13 @@
 import React from 'react'
 import Navbar from './Navbar'
 
-const Header = () => {
+const Header = ({ lastPos, isScrollUp }) => {
+
+    // conditional classNames
+    const isFirstScroll = lastPos > 0 ? 'header__nav--hide header__nav': 'header__nav'
+    const scrollUp = isScrollUp === true ? 'header__nav--fixed header__nav' : 'header__nav'
+    const reactTop = lastPos < 60 ? 'header__nav--react-top' : '';
+
     return (
         <div className="header">
             <div className="header__brand">
@@ -10,7 +16,7 @@ const Header = () => {
                     <p>Brand Header</p>
                 </div>
             </div>
-            <header className="header__nav">
+            <header className={` ${isFirstScroll} ${scrollUp} ${ reactTop }`}>
                 <div>
                     <div className="header__nav-logo">
                         <a href="/">
