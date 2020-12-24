@@ -3,20 +3,20 @@ import Navbar from './Navbar'
 
 const Header = ({ lastPos, isScrollUp }) => {
 
-    // conditional classNames
-    const isFirstScroll = lastPos > 0 ? 'header__nav--hide header__nav': 'header__nav'
-    const scrollUp = isScrollUp === true ? 'header__nav--fixed header__nav' : 'header__nav'
-    const reactTop = lastPos < 60 ? 'header__nav--react-top' : '';
+    // conditional classNames //
+    const firstScroll = lastPos > 0 ? 'header__inner header__inner--nav header__inner--hidden': 'header__inner header__inner--nav';
+    const scrollUp = isScrollUp ? 'header__inner--fixed' : '';
+    const topStack = lastPos < 60 ? 'header__inner--topstack' : '';
 
     return (
         <div className="header">
-            <div className="header__brand">
+            <div className="header__inner header__inner--brand">
                 <div>
                     <p>Brand Header</p>
                     <p>Brand Header</p>
                 </div>
             </div>
-            <header className={` ${isFirstScroll} ${scrollUp} ${ reactTop }`}>
+            <header className={` ${firstScroll} ${scrollUp} ${ topStack }`}>
                 <div>
                     <div className="header__nav-logo">
                         <a href="/">

@@ -6,15 +6,15 @@ const Filterbar = ({ lastPos, isScrollUp }) => {
 
     // conditional classNames
     const scrollUp = isScrollUp === true ? 'filterbar filterbar--fixed' : 'filterbar filterbar--fixed-top'
-    const reactTop = lastPos < 60 ? 'filterbar--react-top' : ''
+    const topStack = lastPos < 60 ? 'filterbar--topstack' : ''
 
 
     return (
-        <div className={` ${ scrollUp } ${reactTop}`}>
-            {/* <div className="filterbar__inner"> */}
+        <div className={` ${ scrollUp } ${topStack}`}>
+            <div>
                 <p>Filter</p>
                 <p>Filter</p>
-            {/* </div> */}
+            </div>
         </div>
     )
 }

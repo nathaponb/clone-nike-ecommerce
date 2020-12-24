@@ -1,8 +1,13 @@
 $gray1: #f5f5f5;
 $max-width: 1920px;
+$padding: 0 14px 0 16px;
+$padding-lg: 0 38px 0 36px;
 $transition1: transform .15s ease;
 
-* {
+// reset
+html, body, header, nav, div, ul, li, a, h1, h2, h3, h4, p, span {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -10,46 +15,38 @@ body {
   .app {
     .header {
       width: 100%;
-      z-index: 100;
-      transition: all .15s ease;
+      z-index: 10;
 
-      .header__brand {
+      .header__inner {
         position: relative;
         background: $gray1;
-        display: none;
-        transition: all .15s ease;
-        div {
-          max-width: $max-width;
-          margin: auto;
-          padding: 0 14px 0 16px;
-          display: flex;
-          justify-content: space-between;
-          transition: all .15s ease;
-          p {
-            margin: 0;
-            padding: 0;
-          }
-        }
-      }
-      .header__nav {
-        position: relative;
-        background: white;
         width: 100%;
+      }
+
+      .header__inner--brand {
+        display: none;
+        // Hidden on mobile
+      }
+
+      .header__inner--nav {
+        background: white;
         height: 60px;
+        z-index: 10;
         transition: transform 1s ease , position 1s ease-in-out;
 
-        &.header__nav--hide {
+        &.header__inner--hidden {
           transform: translateY(-60px);
           transition: transform 1s ease;
         }
-        &.header__nav--fixed {
+        &.header__inner--fixed {
           position: fixed;
           width: 100%;
           top: 0;
+          background: white;
           transform: translateY(0px);
           transition: all .15s ease;
         }
-        &.header__nav--react-top {
+        &.header__inner--topstack {
           position: relative;
           transform: translateY(0px);
           transition: transform .15s ease;
@@ -58,7 +55,7 @@ body {
         div {
           max-width: $max-width;
           margin: auto;
-          padding: 0 14px 0 16px;
+          padding: $padding;
           display: flex;
           position: relative;
 
@@ -74,19 +71,27 @@ body {
             right: 44px;
             bottom: 0;
             height: 60px;
+            padding: 0;
+            margin: 0;
             width: 120px;
+
             .navbar__search {
-              padding: 8px 0;
+              padding: 8px;
+              margin: 0;
               position: relative;
               width: 100%;
 
               button {
-                border: none;
-                background: transparent;
-                padding: 2px;
                 position: absolute;
                 right: 20px;
+                border: none;
+                background: transparent;
+                padding: 0px;
+                margin-top: 3px;
                 transform: scale(0.85);
+              }
+              input {
+                display: none;
               }
             }
           }
@@ -96,11 +101,13 @@ body {
             margin: 0;
             display: flex;
             justify-content: flex-end;
+            align-items: center;
   
             .block-link {
               display: block;
               padding: 0;
               margin: 0;
+              
                 a {
                   padding: 8px;
                 }
@@ -121,10 +128,10 @@ body {
       }
     }
 
-// ----------------------¯\_(ツ)_/¯--------------------------\\
+// ------------------Content¯\_(ツ)_/¯Content--------------------------\\
 
     .content {
-      min-height: 400vh;
+      // min-height: 400vh;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -133,22 +140,15 @@ body {
       box-sizing: border-box;
       max-width: $max-width;
       margin: auto;
-      z-index: -1;
-      // background: pink;
 
         .filterbar {
           background: white;
-          padding: 1rem 0;
           transform: translateY(0px);
           width: 100%;
           color: #333;
+          padding: $padding;
+          z-index: 5;
           transition: transform 150ms ease 0s;
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 14px 10px 16px;
-          // position: fixed;
-          //   top: 0;
-          z-index: -1;
 
           &.filterbar--fixed {
             position: fixed;
@@ -162,14 +162,18 @@ body {
             transform: translateY(0px);
             transition: all 150ms ease 0s;
           }
-          &.filterbar--react-top {
+          &.filterbar--topstack {
             margin: 0;
             position: sticky;
             top: 0;
-            // border: 2px solid #333;
             transform: translateY(0px);
-            padding: 0px 14px 0px 16px;
             transition: transform 150ms ease 0s;;
+          }
+
+          div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             p:first-child {
               padding: 0;
               font-size: 30px;
@@ -177,14 +181,33 @@ body {
             }
             p {
               margin: 0;
-              padding: 0;
+              padding: 0 8px;
             }
           }
         } 
 
-        .content__spacer {
-          background: teal;
-          height: 50px;
+        .content__inner {
+          z-index: 1;
+          display: flex;
+          justify-content: space-between;
+          padding: $padding;
+          flex-flow: row wrap;
+
+          .content-box {
+            height: 350px;
+            width: 350px;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $gray1;
+            
+            
+            small {
+              color: #333;
+              font-size: 18px;
+            }
+          }
         }
     }
   }
@@ -194,15 +217,59 @@ body {
   body {
     .app {
       .header {
-        .header__brand {
+        .header__inner--brand {
           display: block;
-        }
-        .header__nav {
+
           div {
+            max-width: $max-width;
+            margin: auto;
+            padding: $padding-lg;
+            display: flex;
+            justify-content: space-between;
+            p {
+              padding: 8px;
+              font-size: 14px;
+            }
+          }
+        }
+        .header__inner--nav {
+          div {
+            padding: $padding-lg;
             .navbar {
               flex: 1;
               position: relative;
               left: 0;
+              display: flex;
+              align-items: center;
+
+              .navbar__search {
+                width: 180px;
+                position: relative;
+                height: 40px;
+                background: $gray1;
+                border-radius: 16px;
+                cursor: pointer;
+                padding: 0;
+                margin: 0;
+
+                button {
+                  position: absolute;
+                  top: 2px;
+                  left: 5px;
+                  outline: none;
+                  cursor: pointer;
+                }
+                input {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  border: none;
+                  background: transparent;
+                  outline: none;
+                  font-size: 16px;
+                  padding-left: 40px;
+                }
+              }
             }
             .toggle-wrapper {
               flex: 0;
@@ -220,6 +287,15 @@ body {
               }
             }
           }
+        }
+      }
+
+      .content {
+        .filterbar {
+          padding: $padding-lg;
+        }
+        .content__inner {
+          padding: $padding-lg;
         }
       }
     }
